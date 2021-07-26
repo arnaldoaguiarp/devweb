@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="zxx">
+<head>
+
+    <title>Product Details | Equipe OCRE | eCommerce</title>
+
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+    
+
+<body>
+    
+    <header>
+        <!-- Header Start -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/">
+                <!--<img src="assets/img/logo/logo.png" alt=""> -->
+                E-Commerce
+              </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/store/">Produtos</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Categorias
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                      <li><a class="dropdown-item" href="#">Roupas</a></li>
+                      <li><a class="dropdown-item" href="#">Calçados</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Acessórios</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#" tabindex="-1">Sobre a Loja</a>
+                  </li>
+                </ul>
+                <form class="d-flex">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login/" tabindex="-1">Login</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/cart/" tabindex="-1">Carrinho</a>
+                  </li>
+              </div>
+            </div>
+        </nav>
+        <!-- Header End -->
+    </header>
+    <main>
+        <!-- Hero Area Start-->
+        <div class="slider-area ">
+            <div class="single-slider slider-height2 d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="hero-cap text-center">
+                                <h2>Produto</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Hero Area End-->
+        <!--================Single Product Area =================-->
+        <div class="product_image_area">
+            <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                <div class="product_img_slide owl-carousel">
+                    <div class="single_product_img">
+                        <img class="card-img" src="<%= product.image %>" alt="Vans">
+                    </div>
+                    <!--<div class="single_product_img">
+                        <img src="assets/img/gallery/gallery01.png" alt="#" class="img-fluid">
+                    </div>
+                    <div class="single_product_img">
+                        <img src="assets/img/gallery/gallery1.png" alt="#" class="img-fluid">
+                    </div>-->
+                </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="single_product_text text-center">
+                        <h3><%= product.title %></h3>
+                        <p>
+                        <%= product.description %>
+                        </p>
+                    </div>
+                </div>
+                <div class="img-cap btn btn-primary">
+                    <span>Adicionar ao Carrinho</span>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!--================End Single Product Area =================-->
+        
+    </main>
+    <footer>
+        <!-- Footer Start-->
+        <div class="footer-area footer-padding mt-5">
+            <div class="container">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
+                        <div class="single-footer-caption mb-50">
+                            <div class="single-footer-caption mb-30">
+                                <!-- logo -->
+                                <div class="footer-logo">
+                                    <a href="index.html">
+                                        E-Commerce
+                                    </a>
+                                </div>
+                                <div class="footer-tittle">
+                                    <div class="footer-pera">
+                                        <p>Asorem ipsum adipolor sdit amet, consectetur adipisicing elitcf sed do eiusmod tem.</p>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Quick Links</h4>
+                                <ul>
+                                    <li><a href="#">Loja</a></li>
+                                    <li><a href="#"> Sobre nós</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Novos Produtos</h4>
+                                <ul>
+                                    <li><a href="#">Calçados</a></li>
+                                    <li><a href="#">Roupas</a></li>
+                                    <li><a href="#">Acessórios</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Suporte</h4>
+                                <ul>
+                                    <li><a href="#">SAC</a></li>
+                                    <li><a href="#">Contato</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer bottom -->
+                <div class="row align-items-center">
+                    <div class="col-xl-7 col-lg-8 col-md-7">
+                        <div class="footer-copy-right">
+                            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made by <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://google.com" target="_blank">Equipe Ocre</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>                  
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-lg-4 col-md-5">
+                        <div class="footer-copy-right f-right">
+                            <!-- social -->
+                            <div class="footer-social">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-behance"></i></a>
+                                <a href="#"><i class="fas fa-globe"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End-->
+    </footer>
+
+</body>
+
+</html>
+
+<style>
+    @font-face {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/roboto/v27/KFOlCnqEu92Fr1MmWUlfBBc4.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    
+    
+    body, html {
+        height: 100%;
+      }
+      
+      .bg {
+        /* The image used */
+        background-image: url("https://i.pinimg.com/originals/37/83/09/37830988924de37bf9e19ecaa8fe3d58.jpg");
+      
+        /* Full height */
+        height: 100%;
+      
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    
+        height: 700px;
+        width: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    
+      .border{
+        background-color: #11111185;
+        color: #fff;
+        padding: 18px;
+        font-size: 25px;
+      }
+    
+      .section-tittle{
+        margin-bottom: 3rem !important;
+        margin-top: 3rem !important;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+      }
+    
+      .footer-area{
+        background-color: rgb(255, 194, 172);
+      }
+    
+      .product_img_slide{
+        justify-content: center;
+        align-items: center;
+        display: flex;
+      }
+    </style>
