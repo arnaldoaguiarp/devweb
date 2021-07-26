@@ -11,6 +11,7 @@ app.use(cors(corsOptions));
 
 const db = require("./app/models");
 /*
+Serve para dropar o obanco
 db.sequelize.sync({ force: true }).then(() => {
   console.log("Drop and re-sync db.");
 });
