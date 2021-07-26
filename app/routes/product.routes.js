@@ -16,7 +16,7 @@ module.exports = app => {
   router.get("/:seller/new", products.new);
 
   // Update a product with id
-  router.put("/:id", products.update);
+  router.post("/update/:id", products.update);
 
   app.use('/api/products', router);
 };
