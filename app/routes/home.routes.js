@@ -13,5 +13,6 @@ module.exports = function(app) {
   app.get("/", controller.index);
   app.get("/product/:id", controller.product);
   app.get("/store", controller.store);
+  app.get("/cart", controller.cart);
 
 };

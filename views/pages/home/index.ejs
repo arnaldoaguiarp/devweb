@@ -61,6 +61,9 @@
                   <li class="nav-item">
                     <a class="nav-link" href="/cart/" tabindex="-1">Carrinho</a>
                   </li>
+                  <div class="toggle-container">
+                    <input type="checkbox" id="switch" name="theme" /><label for="switch">Toggle</label>
+                </div>
               </div>
             </div>
         </nav>
@@ -126,7 +129,7 @@
                                     <span>R$ <%= product.price %></span>
                                 </div>
                                 <div class="img-cap btn btn-primary">
-                                    <span>Adicionar ao Carrinho</span>
+                                    <button type="button" style="border:none;background: none;" id="<%= product.id %>" style="border:none;" onclick="AddCarrinho('<%= product.title %>', 1, '<%= product.price %>', '<%= product.id %>')"> Adicionar ao Carrinho </button>
                                 </div>
                             </div>
                         </div>
@@ -138,6 +141,13 @@
         <!--? Gallery Area Start -->
         <div class="gallery-area">
             <div class="container-fluid p-0 fix">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="section-tittle">
+                            <h2>Diferenciais</h2>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-xl-6 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-gallery mb-30">
@@ -350,4 +360,138 @@ body, html {
     align-items: center;
     display: flex;
   }
+  html{
+    --bg: #fff;
+    --bg-panel: #ebebeb;
+    
+    --color-text: #333333;
+}
+/* dark theme styling - Here, we set data-them as "dark"*/
+html[data-theme='dark'] {
+    --bg: #333333;
+    --bg-panel: #434343;
+    --color-heading: #0077ff; 
+    --color-text: #B5B5B5;
+}
+body { 
+    background-color: var(--bg); /* background color variable */
+}
+
+
+
+.container h1 {
+  margin: 0;
+  color: var(--color-heading); /* heading 1 background color variable */
+}
+
+.container p {
+  color: var(--color-text); /* text-color variable */
+  -ms-grid-column-span: 2;
+  grid-area: content;
+  font-size: 1.1em;
+  line-height: 1.8em;
+  margin-top: 2em;
+}
+input[type=checkbox] { /* styling for input element */
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+label { /* styling for labels */
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 52px;
+    height: 27px;
+    background: #1ba80e;
+    float: right;
+    border-radius: 100px;
+    position: relative;
+}
+
+label:after { /* styling for labels - on toggle */
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 90px;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+input:checked + label { /* conditional check while toggling */
+    background: var(--color-heading);
+}
+
+input:checked + label:after {
+    left: calc(100% - 5px);
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+}
+
+label:active:after {
+    width: 45px;
+}
 </style>
+
+<script>
+    let theme = localStorage.getItem('data-theme');
+const checkbox = document.getElementById("switch");
+const changeThemeToDark = () =>{
+    document.documentElement.setAttribute("data-theme", "dark")
+    localStorage.setItem("data-theme", "dark")
+    console.log("I give you dark")
+}
+
+const changeThemeToLight = () =>{
+    document.documentElement.setAttribute("data-theme", "light")
+    localStorage.setItem("data-theme", 'light')
+    console.log("I give you light")
+}
+
+if(theme === 'dark'){
+    changeThemeToDark()
+}
+
+checkbox.addEventListener('change', ()=> {
+    let theme = localStorage.getItem('data-theme');
+    if (theme ==='dark'){
+        changeThemeToLight()
+    }else{
+        changeThemeToDark()
+    }
+   
+});
+</script>
+<script>
+	function AddCarrinho(produto, qtd, valor, posicao)
+	{
+        prod = "produto" + posicao, produto
+        var a = localStorage.getItem(prod)
+        console.log(a)
+        if(a){
+            var qntd = "qtd" + posicao, qtd
+            var prod = Number(localStorage.getItem(qntd))+1
+            localStorage.setItem("qtd" + posicao, prod)
+            //localStorage.qntd = Number(localStorage.qntd)+1;
+            let total_itens = localStorage.getItem("qtd" + posicao)
+            //console.log(total_itens)
+		    valor = valor * total_itens;
+            //var tvalor = "valor" + posicao, valor
+            //localStorage.tvalor = valor;
+            localStorage.setItem("valor" + posicao, valor);
+		    alert("Produto adicionado ao carrinho!")
+            //alert("Já existo")
+        }
+        else{
+            localStorage.setItem("produto" + posicao, produto);
+		    localStorage.setItem("qtd" + posicao, qtd);
+		    valor = valor * qtd;
+		    localStorage.setItem("valor" + posicao, valor);
+		    alert("Produto adicionado ao carrinho!");
+        }
+	}
+</script>

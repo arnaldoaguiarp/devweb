@@ -5,6 +5,10 @@ exports.about = (req, res) => {
   res.render('../views/pages/about') 
 }
 
+exports.cart = (req, res) => {
+  res.render('../views/pages/loja/pedido/index') 
+}
+
 exports.index = (req, res) => {
   Product.findAll({ where: {} })
   .then(data => {
