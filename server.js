@@ -1,4 +1,5 @@
 const express = require("express");
+//const expressLayouts = require('express-ejs-layouts')
 const cors = require("cors");
 var session = require('express-session');
 const app = express();
@@ -7,15 +8,21 @@ var corsOptions = {
   origin: "http://localhost:8081"
 };
 
+// set the view engine to ejs
+//app.use(expressLayouts)
+app.set('view engine', 'ejs');
+
 app.use(cors(corsOptions));
 
 const db = require("./app/models");
-/*
+
 //Serve para dropar o banco
+/*
 db.sequelize.sync({ force: true }).then(() => {
   console.log("Drop and re-sync db.");
 });
 */
+
 
 
 // parse requests of content-type - application/json
@@ -31,7 +38,6 @@ require("./app/routes/seller.routes")(app);
 require("./app/routes/auth.routes")(app);
 require("./app/routes/home.routes")(app);
 
-app.set('view engine', 'ejs');
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

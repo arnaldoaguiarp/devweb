@@ -11,60 +11,7 @@
     <title>Ecommerce</title>
   </head>
   <body>
-    <header>
-      <!-- Header Start -->
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-              <!--<img src="assets/img/logo/logo.png" alt=""> -->
-              E-Commerce
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarScroll">
-              <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/store/">Produtos</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Categorias
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                    <li><a class="dropdown-item" href="#">Roupas</a></li>
-                    <li><a class="dropdown-item" href="#">Calçados</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Acessórios</a></li>
-                  </ul>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#" tabindex="-1">Sobre a Loja</a>
-                </li>
-                
-              </ul>
-              <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-              </form>
-              <li class="nav-item">
-                  <a class="nav-link" href="/login/" tabindex="-1">Login</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/cart/" tabindex="-1">Carrinho</a>
-                </li>
-                <div class="toggle-container">
-                  <input type="checkbox" id="switch" name="theme" /><label for="switch">Toggle</label>
-              </div>
-            </div>
-          </div>
-      </nav>
-      <!-- Header End -->
-  
-  </header>
+    <%- include("../../../partials/head.ejs")%>
         <div class="container">
           <div class="row align-items-center">
               <div class="col-12 col-sm-10 col-md-10 col-lg-12">    <table class="table table-hover">
@@ -92,7 +39,7 @@
             <td>   </td>
             <td>
             <button type="button" class="btn btn-default">
-            <span class="fa fa-shopping-cart"></span> Continuar Comprando
+            <a href="/"><span class="fa fa-shopping-cart"></span> Continuar Comprando</a>
             </button></td>
             <td>
             <button type="button" class="btn btn-success">
@@ -104,129 +51,5 @@
         </div>
       </div>
   </div>
-  <style>
-    /* dark theme styling - Here, we set data-them as "dark"*/
-html[data-theme='dark'] {
-    --bg: #333333;
-    --bg-panel: #434343;
-    --color-heading: #0077ff; 
-    --color-text: #B5B5B5;
-}
-body { 
-    background-color: var(--bg); /* background color variable */
-}
-
-
-
-.container h1 {
-  margin: 0;
-  color: var(--color-heading); /* heading 1 background color variable */
-}
-
-.container p {
-  color: var(--color-text); /* text-color variable */
-  -ms-grid-column-span: 2;
-  grid-area: content;
-  font-size: 1.1em;
-  line-height: 1.8em;
-  margin-top: 2em;
-}
-input[type=checkbox] { /* styling for input element */
-    height: 0;
-    width: 0;
-    visibility: hidden;
-}
-
-label { /* styling for labels */
-    cursor: pointer;
-    text-indent: -9999px;
-    width: 52px;
-    height: 27px;
-    background: #1ba80e;
-    float: right;
-    border-radius: 100px;
-    position: relative;
-}
-
-label:after { /* styling for labels - on toggle */
-    content: '';
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    width: 20px;
-    height: 20px;
-    background: #fff;
-    border-radius: 90px;
-    -webkit-transition: 0.3s;
-    transition: 0.3s;
-}
-
-input:checked + label { /* conditional check while toggling */
-    background: var(--color-heading);
-}
-
-input:checked + label:after {
-    left: calc(100% - 5px);
-    -webkit-transform: translateX(-100%);
-            transform: translateX(-100%);
-}
-
-label:active:after {
-    width: 45px;
-}
-</style>
-  </style>
-  <script>
-    let theme = localStorage.getItem('data-theme');
-const checkbox = document.getElementById("switch");
-const changeThemeToDark = () =>{
-    document.documentElement.setAttribute("data-theme", "dark")
-    localStorage.setItem("data-theme", "dark")
-    console.log("I give you dark")
-}
-
-const changeThemeToLight = () =>{
-    document.documentElement.setAttribute("data-theme", "light")
-    localStorage.setItem("data-theme", 'light')
-    console.log("I give you light")
-}
-
-if(theme === 'dark'){
-    changeThemeToDark()
-}
-
-checkbox.addEventListener('change', ()=> {
-    let theme = localStorage.getItem('data-theme');
-    if (theme ==='dark'){
-        changeThemeToLight()
-    }else{
-        changeThemeToDark()
-    }
-   
-});
-</script>
-  <script>
-    //https://www.blogson.com.br/carrinho-de-compras-com-localstorage-do-html-5/
-     var total = 0; // variável que retorna o total dos produtos que estão na LocalStorage.
-     var i = 0;     // variável que irá percorrer as posições
-     var valor = 0; // variável que irá receber o preço do produto convertido em Float.
-     
-     for(i=1; i<=99; i++) // verifica até 99 produtos registrados na localStorage
-     {
-       var prod = localStorage.getItem("produto" + i + ""); // verifica se há recheio nesta posição. 
-       if(prod != null) 
-       {	
-         // exibe os dados da lista dentro da div itens
-         document.getElementById("itens").innerHTML += localStorage.getItem("qtd" + i) + " x ";
-         document.getElementById("itens").innerHTML += localStorage.getItem("produto" + i);
-         document.getElementById("itens").innerHTML += " ";
-         document.getElementById("itens").innerHTML += "R$: " + localStorage.getItem("valor" + i) + "<hr>";
-         
-         // calcula o total dos recheios
-         valor = parseFloat(localStorage.getItem("valor" + i)); // valor convertido com o parseFloat()
-         total = (total + valor); // arredonda para 2 casas decimais com o .toFixed(2)
-       }
-     } 
-     // exibe o total dos recheios
-     document.getElementById("total").innerHTML = "R$"+total.toFixed(2); 
-    </script>
+  </body>
+  </html>
