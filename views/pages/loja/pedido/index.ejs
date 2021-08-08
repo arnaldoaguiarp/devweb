@@ -39,7 +39,7 @@
             <td>   </td>
             <td>
             <button type="button" class="btn btn-default">
-            <a href="/"><span class="fa fa-shopping-cart"></span> Continuar Comprando</a>
+            <span class="fa fa-shopping-cart"></span> Continuar Comprando
             </button></td>
             <td>
             <button type="button" class="btn btn-success">
@@ -51,5 +51,129 @@
         </div>
       </div>
   </div>
-  </body>
-  </html>
+  <style>
+    /* dark theme styling - Here, we set data-them as "dark"*/
+html[data-theme='dark'] {
+    --bg: #333333;
+    --bg-panel: #434343;
+    --color-heading: #0077ff; 
+    --color-text: #B5B5B5;
+}
+body { 
+    background-color: var(--bg); /* background color variable */
+}
+
+
+
+.container h1 {
+  margin: 0;
+  color: var(--color-heading); /* heading 1 background color variable */
+}
+
+.container p {
+  color: var(--color-text); /* text-color variable */
+  -ms-grid-column-span: 2;
+  grid-area: content;
+  font-size: 1.1em;
+  line-height: 1.8em;
+  margin-top: 2em;
+}
+input[type=checkbox] { /* styling for input element */
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+label { /* styling for labels */
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 52px;
+    height: 27px;
+    background: #1ba80e;
+    float: right;
+    border-radius: 100px;
+    position: relative;
+}
+
+label:after { /* styling for labels - on toggle */
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 90px;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+input:checked + label { /* conditional check while toggling */
+    background: var(--color-heading);
+}
+
+input:checked + label:after {
+    left: calc(100% - 5px);
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+}
+
+label:active:after {
+    width: 45px;
+}
+</style>
+  </style>
+  <script>
+    let theme = localStorage.getItem('data-theme');
+const checkbox = document.getElementById("switch");
+const changeThemeToDark = () =>{
+    document.documentElement.setAttribute("data-theme", "dark")
+    localStorage.setItem("data-theme", "dark")
+    console.log("I give you dark")
+}
+
+const changeThemeToLight = () =>{
+    document.documentElement.setAttribute("data-theme", "light")
+    localStorage.setItem("data-theme", 'light')
+    console.log("I give you light")
+}
+
+if(theme === 'dark'){
+    changeThemeToDark()
+}
+
+checkbox.addEventListener('change', ()=> {
+    let theme = localStorage.getItem('data-theme');
+    if (theme ==='dark'){
+        changeThemeToLight()
+    }else{
+        changeThemeToDark()
+    }
+   
+});
+</script>
+<script>
+    //https://www.blogson.com.br/carrinho-de-compras-com-localstorage-do-html-5/
+     var total = 0; // variável que retorna o total dos produtos que estão na LocalStorage.
+     var i = 0;     // variável que irá percorrer as posições
+     var valor = 0; // variável que irá receber o preço do produto convertido em Float.
+     
+     for(i=1; i<=99; i++) // verifica até 99 produtos registrados na localStorage
+     {
+       var prod = localStorage.getItem("produto" + i + ""); // verifica se há recheio nesta posição. 
+       if(prod != null) 
+       {    
+         // exibe os dados da lista dentro da div itens
+         document.getElementById("itens").innerHTML += localStorage.getItem("qtd" + i) + " x ";
+         document.getElementById("itens").innerHTML += localStorage.getItem("produto" + i);
+         document.getElementById("itens").innerHTML += " ";
+         document.getElementById("itens").innerHTML += "R$: " + localStorage.getItem("valor" + i) + "<hr>";
+         
+         // calcula o total dos recheios
+         valor = parseFloat(localStorage.getItem("valor" + i)); // valor convertido com o parseFloat()
+         total = (total + valor); // arredonda para 2 casas decimais com o .toFixed(2)
+       }
+     } 
+     // exibe o total dos recheios
+     document.getElementById("total").innerHTML = "R$"+total.toFixed(2); 
+</script>
