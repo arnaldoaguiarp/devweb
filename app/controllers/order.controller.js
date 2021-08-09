@@ -1,45 +1,72 @@
 // order.controller.js
 
-const { render } = require("ejs");
 const db = require("../models");
 const Order = db.orders;
-const Op = db.Sequelize.Op;
+const Residence = db.residences;
+const Cart = db.carts;
 
 // Create and Save a new Order
 exports.create = (req, res) => {
-  // Validate request
 
-  /*
-if (!req.body.usuario) {
-    res.status(400).send({
-      message: "Content can not be empty!"
-    });
-    return;
+  if (ssn == undefined && ssn.client_id == undefined) {
+    return res.redirect("/login")
   }
-  */
-
- 
   // Create a Order/Pedido
   const pedido = {
-    buy_date: req.body.buy_date,
-    vendedor: req.body.vendedor,
-    usuario: req.body.usuario,
-    status: req.body.status
+    clientId: parseInt(ssn.client_id),
+    status: 'pendente'
+  };
+  
+  Order.create(pedido).then(data => {
+    var i = 1;
+  
+    while (true) {
+      if (req.body[`produto_id_${i}`] == undefined) {
+        break;
+      }
+
+      const dados = {
+        productId: parseInt(req.body[`produto_id_${i}`]) ,
+        orderId:  parseInt(data.dataValues.id),
+        valor_total: req.body[`valor_total_${i}`],
+        quantidade: req.body[`quantidade_${i}`] 
+      };
+      Cart.create(dados)
+      i++;
+    }
+
+    res.render('../views/pages/home/checkout', {
+      order_id: data.dataValues.id
+    });
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while creating the Order."
+    });
+  });
+ 
+};
+
+exports.checkout = (req, res) => {
+  const id = req.params.id;
+
+  Order.update({state: 'aprovado'}, {
+    where: { id: id }
+  })
+
+  const local = {
+    city: req.body.city,
+    street: req.body.street,
+    complement: req.body.complement,
+    state: req.body.state,
+    number: req.body.number,
+    orderId: id
   };
 
-  /*
-    data_comptra DATETIME,
-    id_vendedor int,
-    id_cliente int,
-    status varchar(255),
-    FOREIGN KEY (id_vendedor) REFERENCES vendedor(id_vendedor),
-    FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
-  */
-
-  // Save Order in the database
-  Order.create(pedido)
+  Residence.create(local)
     .then(data => {
-      res.send(data);
+      res.redirect("/api/orders/cliente")
     })
     .catch(err => {
       res.status(500).send({
@@ -49,101 +76,65 @@ if (!req.body.usuario) {
     });
 };
 
-// Retrieve all products from the database.
-exports.findAll = (req, res) => {
-  const title = req.query.usuario;
-  var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-
-  Order.findAll({ where: condition })
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving Orders."
-      });
-    });
-};
-
-// Find a single Order with an id
-exports.findOne = (req, res) => {
-  const id = req.params.id;
-
-  Order.findByPk(id)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "Error retrieving Order with id=" + id
-      });
-    });
-};
-
-// Update a Order by the id in the request
-exports.update = (req, res) => {
-  const id = req.params.id;
-
-  Order.update(req.body, {
-    where: { id: id }
+exports.seller = (req, res) => {
+  const { QueryTypes } = require('sequelize');
+  db.sequelize.query(`
+  SELECT
+    o.id as id,
+    cl.nome as nome,
+    cl.email as email,
+    GROUP_CONCAT(CONCAT('[',c.valor_total, '-', c.quantidade, '-', c.productId,']' ))  as carrinho
+    From orders o
+        Join carts c on c.orderID = o.id
+        Join products p on c.productId = p.id 
+        Join sellers s on p.sellerId  = s.id
+        Join clients cl on cl.id = o.clientId 
+    WHERE 
+      s.id = ${ssn.seller_id}
+    group by
+    o.id`, {
+    nest: true,
+    type: QueryTypes.SELECT
   })
-    .then(num => {
-      if (num == 1) {
-        res.send({
-          message: "Order was updated successfully."
-        });
-      } else {
-        res.send({
-          message: `Cannot update Order with id=${id}. Maybe Order was not found or req.body is empty!`
-        });
-      }
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "Error updating Order with id=" + id
-      });
+  .then(data => {
+    res.render('../views/pages/loja/pedido/show', {
+      orders: data,
+      seller: ssn.seller_id
     });
-};
-
-// Delete a Order with the specified id in the request
-exports.delete = (req, res) => {
-  const id = req.params.id;
-
-  Order.destroy({
-    where: { id: id }
   })
-    .then(num => {
-      if (num == 1) {
-        res.send({
-          message: "Order was deleted successfully!"
-        });
-      } else {
-        res.send({
-          message: `Cannot delete Order with id=${id}. Maybe Order was not found!`
-        });
-      }
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "Could not delete Order with id=" + id
-      });
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while retrieving tutorials."
     });
-};
+  });
+}
 
-// Delete all products from the database.
-exports.deleteAll = (req, res) => {
-  Order.destroy({
-    where: {},
-    truncate: false
+exports.client = (req, res) => {
+  const { QueryTypes } = require('sequelize');
+  db.sequelize.query(`
+  SELECT
+    o.id as id,
+    GROUP_CONCAT(CONCAT('[',c.valor_total, '-', c.quantidade, '-', c.productId,']' ))  as carrinho
+    From orders o
+        Join carts c on c.orderID = o.id
+        Join clients cl on cl.id = o.clientId 
+    WHERE 
+      cl.id = ${ssn.client_id}
+    group by
+    o.id`, {
+    nest: true,
+    type: QueryTypes.SELECT
   })
-    .then(nums => {
-      res.send({ message: `${nums} Order were deleted successfully!` });
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while removing all Orders."
-      });
+  .then(data => {
+    res.render('../views/pages/home/pedidos', {
+      orders: data
     });
-};
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while retrieving tutorials."
+    });
+  });
+}

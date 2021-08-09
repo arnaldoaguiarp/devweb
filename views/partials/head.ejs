@@ -324,11 +324,13 @@ checkbox.addEventListener('change', ()=> {
             //var tvalor = "valor" + posicao, valor
             //localStorage.tvalor = valor;
             localStorage.setItem("valor" + posicao, valor);
+            localStorage.setItem("posicao" + posicao, posicao);
         alert("Produto adicionado ao carrinho!")
             //alert("Já existo")
         }
         else{
             localStorage.setItem("produto" + posicao, produto);
+            localStorage.setItem("posicao" + posicao, posicao);
         localStorage.setItem("qtd" + posicao, qtd);
         valor = valor * qtd;
         localStorage.setItem("valor" + posicao, valor);

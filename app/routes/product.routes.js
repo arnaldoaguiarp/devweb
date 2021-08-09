@@ -12,6 +12,8 @@ module.exports = app => {
   // Retrieve a single product with id
   router.get("/:seller/edit/:id", products.edit);
 
+  router.get("/:seller/delete/:id", products.delete);
+  
   // Retrieve a single product with id
   router.get("/:seller/new", products.new);
 

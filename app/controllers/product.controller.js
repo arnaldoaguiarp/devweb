@@ -75,7 +75,6 @@ exports.create = (req, res) => {
 // Update a Tutorial by the id in the request
 exports.update = (req, res) => {
   const id = req.params.id;
-
   Product.update(req.body, {
     where: { id: id }
   })
@@ -91,6 +90,30 @@ exports.update = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message: "Error updating Tutorial with id=" + id
+      });
+    });
+};
+
+
+// Delete a Product with the specified id in the request
+exports.delete = (req, res) => {
+  const id = req.params.id;
+
+  Product.destroy({
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.redirect("/api/products/" + ssn.seller_id)
+      } else {
+        res.send({
+          message: `Cannot delete Order with id=${id}. Maybe Order was not found!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete Order with id=" + id
       });
     });
 };

@@ -27,28 +27,33 @@ db.carts = require("./cart.model.js")(sequelize, Sequelize);
 db.orders = require("./order.model.js")(sequelize, Sequelize);
 db.residences = require("./residence.model.js")(sequelize, Sequelize);
 
-db.sellers.hasMany(db.products, { as: "products" });
+db.sellers.hasMany(db.products, { as: "products" , onDelete: 'cascade'});
 db.products.belongsTo(db.sellers, {
   foreignKey: "sellerId",
   as: "seller",
 });
 
-db.clients.hasMany(db.orders, { as: "orders" });
+db.clients.hasMany(db.orders, { as: "orders", onDelete: 'cascade' });
 db.orders.belongsTo(db.clients, {
   foreignKey: "clientId",
   as: "client",
 });
 
-db.orders.hasMany(db.carts, { as: "carts" });
+db.orders.hasMany(db.carts, { as: "carts", onDelete: 'cascade' });
 db.carts.belongsTo(db.orders, {
   foreignKey: "orderId",
   as: "order",
 });
 
-db.orders.hasOne(db.residences, { as: "residences" });
+db.orders.hasOne(db.residences, { as: "residences", onDelete: 'cascade' });
 db.residences.belongsTo(db.orders, {
   foreignKey: "orderId",
   as: "order",
+});
+
+db.carts.belongsTo(db.products, {
+  foreignKey: "productId",
+  as: "product",
 });
 
 module.exports = db;
