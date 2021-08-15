@@ -40,6 +40,22 @@ if (!req.body.usuario) {
     });
 };
 
+exports.edit = (req, res) => {
+  const id = req.params.id;
+
+  Seller.findByPk(id)
+  .then(data => {
+    res.render('../views/pages/editar/seller', {
+      id: data.dataValues.id
+    });
+  })
+  .catch(err => {
+    res.status(500).send({
+      message: "Error with id=" + id
+    });
+  });
+}
+
 // Retrieve all products from the database.
 exports.findAll = (req, res) => {
   const title = req.query.usuario;
@@ -89,7 +105,7 @@ exports.update = (req, res) => {
   })
     .then(num => {
       if (num == 1) {
-        return res.redirect("/api/sellers")
+        return res.redirect("/")
       } else {
         res.send({
           message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found or req.body is empty!`

@@ -13,7 +13,7 @@ module.exports = app => {
   // Retrieve a single product with id
   router.get("/:id", sellers.findOne);
 
-  router.get("/edit/:id", sellers.renderUpdate);
+  router.get("/edit/:id", sellers.edit);
   router.post("/edit/:id", sellers.update);
   router.get("/delete/:id", sellers.delete);
 

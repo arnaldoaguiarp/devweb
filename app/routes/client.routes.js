@@ -14,7 +14,7 @@ module.exports = app => {
   router.get("/:id", client.findOne);
 
   // Update a product with id
-  router.get("/edit/:id", client.renderUpdate);
+  router.get("/edit/:id", client.edit);
   router.post("/edit/:id", client.update);
 
   // Delete a product with id

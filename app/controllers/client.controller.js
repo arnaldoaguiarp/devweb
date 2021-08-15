@@ -61,6 +61,23 @@ exports.findAll = (req, res) => {
     });
 };
 
+exports.edit = (req, res) => {
+  const id = req.params.id;
+  console.log(Client.findByPk(id))
+  Client.findByPk(id)
+  .then(data => {
+    res.render('../views/pages/editar/client', {
+      id: data.dataValues.id
+    });
+  })
+  .catch(err => {
+    res.status(500).send({
+      message: "Error with id=" + id
+    });
+  });
+}
+
+
 // Find a single Tutorial with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;
@@ -91,7 +108,7 @@ exports.update = (req, res) => {
     })
       .then(num => {
         if (num == 1) {
-          return res.redirect("/api/clients")
+          return res.redirect("/")
         } else {
           res.send({
             message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found or req.body is empty!`
