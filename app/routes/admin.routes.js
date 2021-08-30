@@ -4,23 +4,25 @@ module.exports = app => {
 
   var router = require("express").Router();
   //Parte de produto
-  // Create a new product
-  // router.post("/", admin.create);
+  // Create a new admin
+  //router.post("/", admin.create);
+  
+  // Show index admin
   router.get("/index", [admin.index]);
 
-  // Retrieve all products
+  // Retrieve all admins
   router.get("/", admin.findAll);
 
-  // Retrieve a single product with id
+  // Retrieve a single admin with id
   router.get("/:id", admin.findOne);
 
-  // Update a product with id
+  // Update a admin with id
   router.put("/:id", admin.update);
 
-  // Delete a product with id
+  // Delete a admin with id
   router.delete("/:id", admin.delete);
 
-  // Delete all products
+  // Delete all admins
   router.delete("/", admin.deleteAll);
 
   app.use('/api/admins', router);

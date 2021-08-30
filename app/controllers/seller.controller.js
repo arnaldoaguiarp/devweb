@@ -45,7 +45,7 @@ exports.edit = (req, res) => {
 
   Seller.findByPk(id)
   .then(data => {
-    res.render('../views/pages/editar/seller', {
+    res.render('../views/pages/sellers/edtSeller', {
       id: data.dataValues.id
     });
   })

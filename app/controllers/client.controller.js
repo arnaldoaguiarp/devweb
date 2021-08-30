@@ -66,7 +66,7 @@ exports.edit = (req, res) => {
   console.log(Client.findByPk(id))
   Client.findByPk(id)
   .then(data => {
-    res.render('../views/pages/editar/client', {
+    res.render('../views/pages/clients/edtClient', {
       id: data.dataValues.id
     });
   })

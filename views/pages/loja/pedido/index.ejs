@@ -43,7 +43,8 @@
             <td>   </td>
            
             <td>
-              <button type="submit" class="btn btn-primary">Comprar</button>
+              <button type="submit" class="btn btn-primary">Comprar</button> 
+              <input type="button" value="Esvaziar Carrinho" class="btn btn-primary" onclick="ClearAll()">
             </td>
             </tr>
             </tbody>
@@ -53,6 +54,13 @@
         </div>
       </div>
   </div>
+  <script>
+  function ClearAll() {
+      localStorage.clear();
+      doShowAll();
+      window.location.reload(forcedReload);
+  }
+  </script>
   <style>
     /* dark theme styling - Here, we set data-them as "dark"*/
 html[data-theme='dark'] {

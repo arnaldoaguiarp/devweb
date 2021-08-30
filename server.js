@@ -5,7 +5,7 @@ var session = require('express-session');
 const app = express();
 app.use(session({secret:'XASDASDA'}));
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: "http://localhost:8080"
 };
 
 // set the view engine to ejs
