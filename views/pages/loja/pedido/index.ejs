@@ -43,8 +43,7 @@
             <td>   </td>
            
             <td>
-              <button type="submit" class="btn btn-primary">Comprar</button> 
-              <input type="button" value="Esvaziar Carrinho" class="btn btn-primary" onclick="ClearAll()">
+              <button type="submit" class="btn btn-primary">Comprar</button>
             </td>
             </tr>
             </tbody>
@@ -54,13 +53,6 @@
         </div>
       </div>
   </div>
-  <script>
-  function ClearAll() {
-      localStorage.clear();
-      doShowAll();
-      window.location.reload(forcedReload);
-  }
-  </script>
   <style>
     /* dark theme styling - Here, we set data-them as "dark"*/
 html[data-theme='dark'] {
@@ -174,7 +166,7 @@ checkbox.addEventListener('change', ()=> {
        if(prod != null) 
        {    
          // exibe os dados da lista dentro da div itens
-         document.getElementById("itens").innerHTML += localStorage.getItem("qtd" + i) + " x ";
+         document.getElementById("itens").innerHTML += "Quantidade: " + localStorage.getItem("qtd" + i) + " x ";
          document.getElementById("itens").innerHTML += localStorage.getItem("produto" + i);
          document.getElementById("itens").innerHTML += " ";
          document.getElementById("itens").innerHTML += "R$: " + localStorage.getItem("valor" + i) + "<hr>";

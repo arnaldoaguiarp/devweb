@@ -45,6 +45,12 @@ exports.renderCreate = (req, res) => {
 
 // Retrieve all products from the database.
 exports.findAll = (req, res) => {
+  ssn = req.session; 
+
+  if (ssn == undefined || ssn.admin_id == undefined) {
+    return res.redirect("/login")
+  }
+  
   const title = req.query.usuario;
   var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
@@ -62,11 +68,16 @@ exports.findAll = (req, res) => {
 };
 
 exports.edit = (req, res) => {
+  ssn = req.session; 
+
+  if (ssn == undefined || ssn.client_id == undefined) {
+    return res.redirect("/login")
+  }
   const id = req.params.id;
   console.log(Client.findByPk(id))
   Client.findByPk(id)
   .then(data => {
-    res.render('../views/pages/clients/edtClient', {
+    res.render('../views/pages/editar/client', {
       id: data.dataValues.id
     });
   })

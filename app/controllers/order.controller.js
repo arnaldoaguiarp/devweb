@@ -111,6 +111,12 @@ exports.seller = (req, res) => {
 }
 
 exports.client = (req, res) => {
+  ssn = req.session; 
+
+  if (ssn == undefined || ssn.client_id == undefined) {
+    return res.redirect("/login")
+  }
+
   const { QueryTypes } = require('sequelize');
   db.sequelize.query(`
   SELECT
@@ -128,7 +134,8 @@ exports.client = (req, res) => {
   })
   .then(data => {
     res.render('../views/pages/home/pedidos', {
-      orders: data
+      orders: data,
+      id: ssn.client_id
     });
   })
   .catch(err => {

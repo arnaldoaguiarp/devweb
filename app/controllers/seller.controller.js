@@ -41,11 +41,16 @@ if (!req.body.usuario) {
 };
 
 exports.edit = (req, res) => {
+  ssn = req.session; 
+
+  if (ssn == undefined || ssn.seller_id == undefined) {
+    return res.redirect("/login")
+  }
   const id = req.params.id;
 
   Seller.findByPk(id)
   .then(data => {
-    res.render('../views/pages/sellers/edtSeller', {
+    res.render('../views/pages/editar/seller', {
       id: data.dataValues.id
     });
   })
@@ -58,6 +63,12 @@ exports.edit = (req, res) => {
 
 // Retrieve all products from the database.
 exports.findAll = (req, res) => {
+  ssn = req.session; 
+
+  if (ssn == undefined || ssn.admin_id == undefined) {
+    return res.redirect("/login")
+  }
+
   const title = req.query.usuario;
   var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 

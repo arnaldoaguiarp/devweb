@@ -95,7 +95,7 @@ exports.signin = (req, res) => {
           });
           ssn.client_id = client.id
           ssn.tipo_user = "client"
-          res.redirect("/")
+          return res.redirect("/")
         }
 
       }
@@ -117,7 +117,7 @@ exports.signin = (req, res) => {
           });
           ssn.seller_id = seller.id
           ssn.tipo_user = "seller"
-          res.redirect("/api/products/" + ssn.seller_id)
+          return res.redirect("/api/products/" + ssn.seller_id)
         }
 
       }
@@ -137,18 +137,21 @@ exports.signin = (req, res) => {
           const accessToken = jwt.sign({ id: admin.id }, config.secret, {
             expiresIn: 86400 // 24 hours
           });
-          return res.redirect("/api/admins/index?token="+accessToken)
-          // return res.status(200).send({ message: "isso daí Admin, logado", accessToken })
+          ssn.admin_id = admin.id
+          ssn.tipo_user = "admin"
+          return res.redirect("/api/admins/index")
         }
 
       }
     }).catch(err => {
       res.status(500).send({ message: err.message });
     });
+  
 }
 
 exports.signout = (req, res) => {
-  res.render('../views/pages/about')
+  req.session.destroy();
+  res.redirect("/login");
 };
 
 exports.login = (req, res) => {

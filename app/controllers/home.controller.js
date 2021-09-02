@@ -6,6 +6,10 @@ exports.about = (req, res) => {
 }
 
 exports.cart = (req, res) => {
+  ssn = req.session;
+  if (ssn == undefined || ssn.client_id == undefined) {
+    return res.redirect("/login")
+  }
   res.render('../views/pages/loja/pedido/index') 
 }
 

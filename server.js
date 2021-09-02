@@ -5,7 +5,7 @@ var session = require('express-session');
 const app = express();
 app.use(session({secret:'XASDASDA'}));
 var corsOptions = {
-  origin: "http://localhost:8080"
+  origin: "https://ecommerceamarelo.herokuapp.com"
 };
 
 // set the view engine to ejs
@@ -40,7 +40,7 @@ require("./app/routes/home.routes")(app);
 require("./app/routes/order.routes")(app);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

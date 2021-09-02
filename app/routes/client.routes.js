@@ -4,23 +4,23 @@ module.exports = app => {
 
   var router = require("express").Router();
   //Parte de produto
-  // Create a new client
+  // Create a new product
   router.post("/", client.create);
 
-  // Retrieve all clients
+  // Retrieve all products
   router.get("/", client.findAll);
 
-  // Retrieve a single client with id
+  // Retrieve a single product with id
   router.get("/:id", client.findOne);
 
-  // Update a client with id
+  // Update a product with id
   router.get("/edit/:id", client.edit);
   router.post("/edit/:id", client.update);
 
-  // Delete a client with id
+  // Delete a product with id
   router.get("/delete/:id", client.delete);
 
-  // Delete all clients
+  // Delete all products
   router.delete("/", client.deleteAll);
 
   app.use('/api/clients', router);

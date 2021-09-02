@@ -45,10 +45,31 @@
                         <div class="hero-cap text-center">
                             <h5>Conheça nossa nova coleção de Verão</h5>
                         </div>
+                        <!--Nav Button  -->
+                        <nav>                                             
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-selected="true">NewestArrivals</a>
+                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-selected="false"> Price high to low</a>
+                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-selected="false"> Most populer </a>
+                            </div>
+                        </nav>
                         <!--End Nav Button  -->
                     </div>
                     <!-- Grid and List view -->
                     <div class="grid-list-view">
+                    </div>
+                    <!-- Select items -->
+                    <div class="select-this">
+                        <form action="#">
+                            <div class="select-itms">
+                                <select name="select" id="select1">
+                                    <option value="">40 per page</option>
+                                    <option value="">50 per page</option>
+                                    <option value="">60 per page</option>
+                                    <option value="">70 per page</option>
+                                </select>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <!-- Nav Card -->
@@ -67,12 +88,12 @@
                                         </div>
                                         <div class="popular-caption">
                                             <h3><a href="/product/<%= product.id %>"><%= product.title %></a></h3>
-                                            <h5><span>Valor: R$ <%= product.price %></span></h5><br>
+                                            <span>R$ <%= product.price %></span>
                                             <script>
                                                 console.log("/product/<%= product.id %>");
                                             </script>
                                             <div class="img-cap btn btn-primary">
-                                                <button type="button" style="border:none;background: none;" id="<%= product.id %>" style="border:none;" onclick="AddCarrinho('<%= product.title %>', 1, '<%= product.price %>', '<%= product.id %>')"> Adicionar ao Carrinho </button>
+                                                <span>Adicionar ao Carrinho</span>
                                             </div>
                                         </div>
                                     </div>
@@ -86,7 +107,31 @@
             </div>
         </section>
         <!-- Latest Products End -->
-
+        <!--? Shop Method Start-->
+        <div class="shop-method-area">
+            <div class="container">
+                <div class="method-wrapper mt-5">
+                    <div class="row d-flex justify-content-between">
+                        <div class="col-xl-4 col-lg-4 col-md-6">
+                            <div class="single-method mb-40">
+                                <i class="ti-package"></i>
+                                <h6>Entrega Rápida</h6>
+                                <p>Nossos centros de distribuição e colaboradores trabalham com a maxima eficiência para você conseguir ter acesso rápidos aos mais diversos itens disponíveis em nosso E-Commerce.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xl-4 col-lg-4 col-md-6">
+                            <div class="single-method mb-40">
+                                <i class="ti-reload"></i>
+                                <h6>Compras Garantidas</h6>
+                                <p>Nosso E-Commerce só trabalha com produtos originais e cadastrados, com garantia pela compra e troca, pode ficar tranquilo e aproveitar as melhoras ofertas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Shop Method End-->
     </main>
     <footer>
         <!-- Footer Start-->

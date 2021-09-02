@@ -51,24 +51,28 @@
                     <div class="single_product_img">
                         <img class="card-img" src="<%= product.image %>" alt="Vans">
                     </div>
+                    <!--<div class="single_product_img">
+                        <img src="assets/img/gallery/gallery01.png" alt="#" class="img-fluid">
+                    </div>
+                    <div class="single_product_img">
+                        <img src="assets/img/gallery/gallery1.png" alt="#" class="img-fluid">
+                    </div>-->
                 </div>
                 </div>
                 <div class="col-lg-8">
                     <div class="single_product_text text-center">
                         <h3><%= product.title %></h3>
                         <p>
-                        Valor: R$<%= product.price %>
+                        <%= product.description %>
                         </p>
                     </div>
                 </div>
-                <center>
-                <div class="img-cap">
+                <div class="img-cap btn btn-primary">
                     <div class="img-cap btn btn-primary">
                         <button class="img-cap btn btn-primary" type="button" id="<%= product.id %>" style="border:none;background: none;" onclick="AddCarrinho('<%= product.title %>', 1, '<%= product.price %>', '<%= product.id %>')"> Adicionar ao Carrinho </button>
                     </div>
                     
                 </div>
-                </center>
             </div>
             </div>
         </div>

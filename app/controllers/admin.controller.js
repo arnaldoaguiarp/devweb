@@ -4,43 +4,11 @@ const db = require("../models");
 const Admin = db.admins;
 const Op = db.Sequelize.Op;
 
-// Create and Save a new Tutorial
-// exports.create = (req, res) => {
-//   // Validate request
-//   if (!req.body.email) {
-//     res.status(400).send({
-//       message: "Content can not be empty!"
-//     });
-//     return;
-//   }
-
- 
-//   // Create a Tutorial
-//   const tutorial = {
-//     usuario: req.body.usuario,
-//     cpf: req.body.cpf,
-//     telefone: req.body.telefone,
-//     email: req.body.email,
-//     senha: req.body.senha
-//   };
-
-//   // Save Tutorial in the database
-//   Admin.create(tutorial)
-//     .then(data => {
-//       res.send(data);
-//     })
-//     .catch(err => {
-//       res.status(500).send({
-//         message:
-//           err.message || "Some error occurred while creating the Tutorial."
-//       });
-//     });
-// };
 
 exports.index = (req, res) => {
   res.render('../views/pages/administrador/index')
 }
-// Retrieve all products from the database.
+
 exports.findAll = (req, res) => {
   const title = req.query.usuario;
   var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
